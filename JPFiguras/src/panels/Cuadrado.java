@@ -62,7 +62,7 @@ public class Cuadrado extends javax.swing.JPanel {
         jLabel2.setText("Lado");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
-        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cuadrado.png"))); // NOI18N
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cuadrado.png"))); // NOI18N
         lblImagen.setAlignmentY(0.0F);
         add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
     }// </editor-fold>//GEN-END:initComponents
