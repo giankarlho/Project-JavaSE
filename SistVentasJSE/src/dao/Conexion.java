@@ -16,7 +16,7 @@ public class Conexion {
            Class.forName(driver).newInstance();
            cnx = DriverManager.getConnection(url, user, pwd);
        } catch (Exception e) {
-           e.getMessage();
+           System.out.println("Error en la conexión " + e.getMessage());
        }
        return cnx;
    }
