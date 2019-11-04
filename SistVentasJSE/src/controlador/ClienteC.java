@@ -22,27 +22,29 @@ public class ClienteC implements Serializable {
         try {
             dao = new ClienteImpl();
             getDatos();
-            dao.registrar(cli);            
+            dao.registrar(cli);
         } catch (Exception e) {
             System.out.println("Error en registrarC " + e.getMessage());
         }
     }
 
     public void modificar() {
+        dao = new ClienteImpl();
         try {
-            dao = new ClienteImpl();
+            getDatos();
+            System.out.println("idCliente " + ClienteView.idCliente);
             dao.modificar(cli);
         } catch (Exception e) {
-            System.out.println("Error en registrarC " + e.getMessage());
+            System.out.println("Error en modificarC " + e.getMessage());
         }
     }
 
     public void eliminar() {
+        dao = new ClienteImpl();
         try {
-            dao = new ClienteImpl();
             dao.eliminar(cli.getId());
         } catch (Exception e) {
-            System.out.println("Error en registrarC " + e.getMessage());
+            System.out.println("Error en eliminarC " + e.getMessage());
         }
     }
 
@@ -57,9 +59,8 @@ public class ClienteC implements Serializable {
 
     public void getDatos() {
         try {
-            System.out.println(ClienteView.txtApe.getText());
+            cli.setId(ClienteView.idCliente);
             cli.setApellido(ClienteView.txtApe.getText());
-            System.out.println("");
             cli.setNombre(ClienteView.txtNom.getText());
             cli.setDni(ClienteView.txtDNI.getText());
             cli.setSexo(ClienteView.sexo);
@@ -68,7 +69,6 @@ public class ClienteC implements Serializable {
         } catch (Exception e) {
             System.out.println("Error en getDatos " + e.getMessage());
         }
-
     }
 
 }
