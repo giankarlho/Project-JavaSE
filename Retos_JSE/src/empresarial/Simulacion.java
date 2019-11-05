@@ -60,7 +60,6 @@ public class Simulacion extends javax.swing.JFrame {
         txt_total = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txt_ganador = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -148,11 +147,6 @@ public class Simulacion extends javax.swing.JFrame {
         jLabel13.setText("CANDIDATO GANADOR");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 410, 29));
         getContentPane().add(txt_ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 280, 29));
-
-        jLabel9.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/Eleccion.jpg"))); // NOI18N
-        jLabel9.setText("jLabel9");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 820, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -287,7 +281,6 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txt_b;
     private javax.swing.JTextField txt_c1;
     private javax.swing.JTextField txt_c2;
