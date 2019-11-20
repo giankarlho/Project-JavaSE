@@ -5,7 +5,10 @@ import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import service.LimitarCaracter;
+import service.ReportGenerator;
 
 public class ClienteView extends javax.swing.JFrame {
 
@@ -247,6 +250,11 @@ public class ClienteView extends javax.swing.JFrame {
         btnImprimir.setMaximumSize(new java.awt.Dimension(113, 41));
         btnImprimir.setMinimumSize(new java.awt.Dimension(113, 41));
         btnImprimir.setPreferredSize(new java.awt.Dimension(113, 41));
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nuevo.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
@@ -431,6 +439,17 @@ public class ClienteView extends javax.swing.JFrame {
             System.out.println("error en btnModificar " + e.getMessage());
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        try {
+            ReportGenerator report = new ReportGenerator();
+            JasperPrint reportelleno = report.generarReporteSimplePersonal();
+            JasperViewer viewer = new JasperViewer(reportelleno, false);
+            viewer.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("bntImprimir " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void Cargar_Tabla() throws Exception {
         String columna[] = new String[]{"Nro", "Nombre", "Apellidos", "Sexo", "DNI", "Nacimiento"};
