@@ -4,6 +4,7 @@ import controlador.ClienteC;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -24,8 +25,11 @@ public class ClienteView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         btnGroupSex.add(optFemenino);
         btnGroupSex.add(optMasculino);
+        btnGroupFiltro.add(jrDni);
+        btnGroupFiltro.add(jrNom);
         Cargar_Tabla();
         limitar();
+        deshabilitar();
     }
 
     @SuppressWarnings("unchecked")
@@ -33,6 +37,7 @@ public class ClienteView extends javax.swing.JFrame {
     private void initComponents() {
 
         btnGroupSex = new javax.swing.ButtonGroup();
+        btnGroupFiltro = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCliente = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -57,6 +62,11 @@ public class ClienteView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         lblCodigo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jrNom = new javax.swing.JRadioButton();
+        jrDni = new javax.swing.JRadioButton();
+        txtFiltro = new javax.swing.JTextField();
+        chkTodos = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -127,6 +137,11 @@ public class ClienteView extends javax.swing.JFrame {
 
         txtDNI.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtDNI.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDNIKeyTyped(evt);
+            }
+        });
 
         jdFecha.setForeground(new java.awt.Color(51, 0, 255));
         jdFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -310,6 +325,65 @@ public class ClienteView extends javax.swing.JFrame {
         lblCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCodigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
+
+        jrNom.setText("Nombre");
+        jrNom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrNomActionPerformed(evt);
+            }
+        });
+
+        jrDni.setText("DNI");
+        jrDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrDniActionPerformed(evt);
+            }
+        });
+
+        txtFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFiltro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFiltro.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtFiltroCaretUpdate(evt);
+            }
+        });
+
+        chkTodos.setSelected(true);
+        chkTodos.setText("Todos");
+        chkTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkTodosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chkTodos)
+                .addGap(23, 23, 23)
+                .addComponent(jrNom)
+                .addGap(18, 18, 18)
+                .addComponent(jrDni)
+                .addGap(47, 47, 47)
+                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrDni)
+                    .addComponent(jrNom)
+                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkTodos))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -323,7 +397,7 @@ public class ClienteView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -334,13 +408,14 @@ public class ClienteView extends javax.swing.JFrame {
                                 .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel5)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -349,8 +424,10 @@ public class ClienteView extends javax.swing.JFrame {
                     .addComponent(jpComandos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpAtributos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -393,6 +470,7 @@ public class ClienteView extends javax.swing.JFrame {
             if (fila >= 0) {
                 btnModificar.setEnabled(true);
                 btnEliminar.setEnabled(true);
+                habilitar();
                 lblCodigo.setText(jtCliente.getValueAt(fila, 0).toString());
                 idCliente = Integer.parseInt(jtCliente.getValueAt(fila, 0).toString());
                 txtNom.setText(jtCliente.getValueAt(fila, 1).toString());
@@ -415,6 +493,7 @@ public class ClienteView extends javax.swing.JFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         btnRegistrar.setEnabled(true);
         limpiar();
+        habilitar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -431,14 +510,65 @@ public class ClienteView extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         controller = new ClienteC();
         try {
-            controller.eliminar();
-            Cargar_Tabla();
-            btnEliminar.setEnabled(false);
-            limpiar();
+            int opcion = JOptionPane.showConfirmDialog(null, "Desea eliminar el registro", "Eliminación de Registro", JOptionPane.YES_NO_OPTION);
+            if (opcion == JOptionPane.YES_OPTION) {
+                controller.eliminar();
+                Cargar_Tabla();
+                btnEliminar.setEnabled(false);
+                limpiar();
+                deshabilitar();
+            }
         } catch (Exception e) {
             System.out.println("error en btnModificar " + e.getMessage());
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jrNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNomActionPerformed
+        tipo = 2; // filtro x nombre
+        chkTodos.setSelected(false);
+        txtFiltro.requestFocus();
+        txtFiltro.setEnabled(true);
+    }//GEN-LAST:event_jrNomActionPerformed
+
+    private void txtFiltroCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtFiltroCaretUpdate
+        try {
+            dato = txtFiltro.getText();
+            Cargar_Tabla();
+        } catch (Exception ex) {
+            System.out.println("Error " + ex.getMessage());
+        }
+    }//GEN-LAST:event_txtFiltroCaretUpdate
+
+    private void jrDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrDniActionPerformed
+        tipo = 5; // filtrar por DNI
+        chkTodos.setSelected(false);
+        txtFiltro.requestFocus();
+        txtFiltro.setEnabled(true);
+    }//GEN-LAST:event_jrDniActionPerformed
+
+    private void chkTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTodosActionPerformed
+        if (chkTodos.isSelected() == true) {
+            btnGroupFiltro.clearSelection();
+            txtFiltro.setText("");
+            dato = "";
+            tipo = 1; // no filtrar
+            txtFiltro.setEnabled(false);
+            try {
+                Cargar_Tabla();
+            } catch (Exception ex) {
+                System.out.println("Error " + ex.getMessage());
+            }
+        } else {
+
+        }
+    }//GEN-LAST:event_chkTodosActionPerformed
+
+    private void txtDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDNIKeyTyped
+        char car = evt.getKeyChar();
+        if ((car < '0' || car > '9')) { // sólo me acepta números del 0 al 9
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDNIKeyTyped
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         try {
@@ -449,6 +579,7 @@ public class ClienteView extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("bntImprimir " + e.getMessage());
         }
+
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void Cargar_Tabla() throws Exception {
@@ -467,6 +598,18 @@ public class ClienteView extends javax.swing.JFrame {
         txtApe.setText("");
         txtNom.setText("");
         txtDNI.setText("");
+    }
+
+    private void habilitar() {
+        txtNom.setEnabled(true);
+        txtApe.setEnabled(true);
+        txtDNI.setEnabled(true);
+    }
+
+    private void deshabilitar() {
+        txtNom.setEnabled(false);
+        txtApe.setEnabled(false);
+        txtDNI.setEnabled(false);
     }
 
     public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -496,11 +639,13 @@ public class ClienteView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
+    private javax.swing.ButtonGroup btnGroupFiltro;
     private javax.swing.ButtonGroup btnGroupSex;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JCheckBox chkTodos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -508,10 +653,13 @@ public class ClienteView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JPanel jpAtributos;
     private javax.swing.JPanel jpComandos;
+    private javax.swing.JRadioButton jrDni;
+    private javax.swing.JRadioButton jrNom;
     private javax.swing.JTable jtCliente;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblTotal;
@@ -519,6 +667,7 @@ public class ClienteView extends javax.swing.JFrame {
     private javax.swing.JRadioButton optMasculino;
     public static javax.swing.JTextField txtApe;
     public static javax.swing.JTextField txtDNI;
+    private javax.swing.JTextField txtFiltro;
     public static javax.swing.JTextField txtNom;
     // End of variables declaration//GEN-END:variables
 }

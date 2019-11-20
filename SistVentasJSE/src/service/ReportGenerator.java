@@ -13,7 +13,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 public class ReportGenerator extends Conexion {
 
-//    public final String REPORTE_SIMPLE_CLIENTE = "reports/ListCliente.jasper";
+//    public final String REPORTE_SIMPLE_CLIENTE = "ListCliente.jasper";
 
     public JasperPrint generarReporteSimpleCliente() throws JRException, ClassNotFoundException {
         try {
