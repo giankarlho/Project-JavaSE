@@ -443,7 +443,7 @@ public class ClienteView extends javax.swing.JFrame {
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         try {
             ReportGenerator report = new ReportGenerator();
-            JasperPrint reportelleno = report.generarReporteSimplePersonal();
+            JasperPrint reportelleno = report.generarReporteSimpleCliente();
             JasperViewer viewer = new JasperViewer(reportelleno, false);
             viewer.setVisible(true);
         } catch (Exception e) {
