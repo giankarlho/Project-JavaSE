@@ -1,6 +1,7 @@
-# Proyectos-JavaSE
-Estructuras de Control
+# Ejercicios algorítmicos con Java 
+### Estructuras de Control
 * Condicionales: if, else if, swich
-* Repetitivas: for, while, do while, for each
+### Estructuras Repetitivas
+* Iteradores: for, while, do while, for each
 * Arreglos: unidimensionales y bidimensioneales, 
 * Arrays
