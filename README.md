@@ -1,8 +1,6 @@
 # Proyectos-JavaSE
-Java SE: algoritmos, aplicaciones, jframe, jpanel, bd con mysql
-* Algoritmos resueltos con Java
-* JSwing:
-** Calculadora
-** 
-*JPanel
-* Sistema de Farmacia con MySQL
+Estructuras de Control
+* Condicionales: if, else if, swich
+* Repetitivas: for, while, do while, for each
+* Arreglos: unidimensionales y bidimensioneales, 
+* Arrays
